@@ -1,7 +1,7 @@
-" ********************* Vimrc files for GVim **************
+" ********************* Vimrc Config files for Vim And MacVIM **************
 " Author: Handaoliang <handaoliang@gmail.com>
 " Create Date:  2010-04-20 10:20:22
-" Last Change:  2010-04-29 10:35:49
+" Last Change:  2014-10-31 19:49:30
 " Encoding: UTF-8.
 " CopyRights (c) www.handaoliang.com All Rights Reserved.
 
@@ -15,8 +15,22 @@
 set nocompatible
 
 " 设置TAB为4个空格。
+set shiftwidth=4
+set expandtab
 set softtabstop=4
-set ts=4
+set tabstop=4
+
+"""""""""""""""""""针对MacVIM的设置"""""""""""""""""""
+if has ("mac")
+    " 设置显示字体
+    set guifont=YaHei\ Mono:h13
+
+    " 窗口相关。
+    winpos 50 50
+    set lines=48 columns=180
+    colo desert
+endif
+"""""""""""""""""""针对MacVIM的设置"""""""""""""""""""
 
 " 编码设置
 set termencoding=UTF-8
@@ -88,12 +102,21 @@ set smartindent
 " 设置备份及备份目录。
 set backspace=indent,eol,start
 
-" 备份文件夹。
-" set backupdir=~/.vim/backup_files
-
 " 禁止生成临时文件
 set nobackup
 set noswapfile
+
+" 如果没有设定禁止生成临时文件，那么要指定一下目录。
+" 备份文件夹。
+" set backupdir=~/.vim/backup_files
+
+" 指定SWAP文件目录，以免当前目录下有SWAP文件
+" if has("win32") || has("win64")
+"     set directory=$TMP
+" else
+"     set directory=~/TempDir/vim_swap_files
+" end
+
 
 " 设置自动切换目录。
 " set autochdir
@@ -203,7 +226,7 @@ set backspace=2
 set report=0
 
 " 启动的时候不显示那个援助索马里儿童的提示
-set shortmess=atI
+" set shortmess=atI
 
 " 在被分割的窗口间显示空白，便于阅读
 set fillchars=vert:\ ,stl:\ ,stlnc:\
@@ -216,7 +239,6 @@ set matchtime=5
 
 " 光标移动到buffer的顶部和底部时保持3行距离
 set scrolloff=3
-
 
 " 状态行颜色
 highlight StatusLine guifg=SlateBlue guibg=Yellow
@@ -274,10 +296,14 @@ filetype indent on
 " set foldmethod=indent
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 
-" map <F3> zO " 打开折叠
-map <F4> zc " 关闭折叠
-map <F5> zR	" 打开所有折叠
-map <F6> zM	" 关闭所有折叠
+" 打开折叠
+" map <F3> zO
+" 关闭折叠
+map <F4> zc
+" 打开所有折叠
+map <F5> zR
+" 关闭所有折叠
+map <F6> zM
 
 " 保存代码文件前自动修改最后修改时间
 " au BufWritePre *.sh           call TimeStamp('#')
@@ -289,8 +315,8 @@ map <F6> zM	" 关闭所有折叠
 " au BufWritePre *.rb           call TimeStamp('#')
 " au BufWritePre *.py           call TimeStamp('#')
 " au BufWritePre Makefile       call TimeStamp('#')
-" au BufWritePre *.php 		  call TimeStamp('<?php //', '?>')
-" au BufWritePre *.html,*htm	  call TimeStamp('<!--', '-->')
+" au BufWritePre *.php        call TimeStamp('<?php //', '?>')
+" au BufWritePre *.html,*htm      call TimeStamp('<!--', '-->')
 
 " C/C++的编译和运行
 map <F5> :call CompileRunGcc()<CR>
@@ -399,27 +425,27 @@ map <F7> :vsplit<ENTER>:edit `pwd`<ENTER>i
 
 " 自动完成的缩进。
 if has("autocmd")
-	" if has("gui")
-	" 	autocmd WinLeave * set nocursorline nocursorcolumn
-	" 	autocmd WinEnter * set cursorline cursorcolumn
-	" else
-	" 	autocmd WinLeave * set nocursorline nocursorcolumn
-	" 	autocmd WinEnter * set cursorline nocursorcolumn
-	" endif
+    " if has("gui")
+    "   autocmd WinLeave * set nocursorline nocursorcolumn
+    "   autocmd WinEnter * set cursorline cursorcolumn
+    " else
+    "   autocmd WinLeave * set nocursorline nocursorcolumn
+    "   autocmd WinEnter * set cursorline nocursorcolumn
+    " endif
 
-	" Enable file type detection.
+    " Enable file type detection.
 
-	" load view saved by the mkview command
-	autocmd FileType * loadview
-	autocmd FileType * set noexpandtab
-	" autocmd BufWinEnter * loadview
+    " load view saved by the mkview command
+    autocmd FileType * loadview
+    autocmd FileType * set noexpandtab
+    " autocmd BufWinEnter * loadview
 
-	" Use the default filetype settings, so that mail gets 'tw' set to 72,
-	" 'cindent' is on in C files, etc.
-	" Also load indent files, to automatically do language-dependent indenting.
-	filetype plugin indent on
+    " Use the default filetype settings, so that mail gets 'tw' set to 72,
+    " 'cindent' is on in C files, etc.
+    " Also load indent files, to automatically do language-dependent indenting.
+    filetype plugin indent on
 
-	" In text files, always limit the width of text to 78 characters
+    " In text files, always limit the width of text to 78 characters
     autocmd BufEnter *.txt set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
     autocmd FileType text set textwidth=78 expandtab softtabstop=4
     autocmd FileType sh set shiftwidth=4 expandtab softtabstop=4
@@ -431,53 +457,55 @@ if has("autocmd")
     autocmd FileType ruby set shiftwidth=2 expandtab softtabstop=2
     autocmd FileType eruby set shiftwidth=2 expandtab softtabstop=2
     autocmd FileType sql set shiftwidth=4 expandtab softtabstop=4
-	autocmd FileType go set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType go set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType lua set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType _vimrc,.vimrc,*.vim set shiftwidth=4 expandtab softtabstop=4
 
-	" When editing a file, always jump to the last known cursor position.
-	" Don't do it when the position is invalid or when inside an event handler
-	" (happens when dropping a file on gvim).
-	autocmd BufReadPost *
-			  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-			  \   execute "normal g`\"" |
-			  \ endif
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+              \ if line("'\"") > 0 && line("'\"") <= line("$") |
+              \   execute "normal g`\"" |
+              \ endif
 
-	augroup prog
-		" Remove all cprog autocommands
-		autocmd!
+    augroup prog
+        " Remove all cprog autocommands
+        autocmd!
 
-		" When starting to edit a file:
-		"   For C and C++ files set formatting of comments and set C-indenting on.
-		"   For other files switch it off.
-		"   Don't change the order, it's important that the line with * comes first.
-		autocmd FileType *      set formatoptions=tcoql nocindent comments&
+        " When starting to edit a file:
+        "   For C and C++ files set formatting of comments and set C-indenting on.
+        "   For other files switch it off.
+        "   Don't change the order, it's important that the line with * comes first.
+        autocmd FileType *      set formatoptions=tcoql nocindent comments&
 
-		" autocmd BufWinLeave *.sh,*.c,*.cpp,*.perl,*.py mkview
-		autocmd BufWinEnter *.sh,*.c,*.cpp,*.perl,*.py silent loadview
+        " autocmd BufWinLeave *.sh,*.c,*.cpp,*.perl,*.py mkview
+        autocmd BufWinEnter *.sh,*.c,*.cpp,*.perl,*.py silent loadview
 
-		function! CleverTab()
-			if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-				return "\<Tab>"
-			else
-				return "\<C-N>"
-		endfunction
-		autocmd FileType c,cpp  noremap! <S-Tab> <C-R>=CleverTab()<CR>
-		autocmd FileType c,cpp  noremap! <C-]> <C-X><C-]>
-		autocmd FileType c,cpp  noremap! <C-F> <C-X><C-F>
-		autocmd FileType c,cpp  noremap! <C-D> <C-X><C-D>
-		autocmd FileType c,cpp  noremap! <C-L> <C-X><C-L>
+        function! CleverTab()
+            if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+                return "\<Tab>"
+            else
+                return "\<C-N>"
+        endfunction
+        autocmd FileType c,cpp  noremap! <S-Tab> <C-R>=CleverTab()<CR>
+        autocmd FileType c,cpp  noremap! <C-]> <C-X><C-]>
+        autocmd FileType c,cpp  noremap! <C-F> <C-X><C-F>
+        autocmd FileType c,cpp  noremap! <C-D> <C-X><C-D>
+        autocmd FileType c,cpp  noremap! <C-L> <C-X><C-L>
 
-		autocmd FileType c,cpp,sh,perl,python set fileformat=unix
+        autocmd FileType c,cpp,sh,perl,python set fileformat=unix
 
-		autocmd FileType sh     set formatoptions=croql cindent comments=b:#
-		autocmd FileType c,cpp  set expandtab shiftwidth=4 softtabstop=4
-		autocmd FileType c,cpp  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,://
-		autocmd FileType c,cpp  set foldmethod=marker foldmarker=--fb--{{{,--fe--}}} commentstring=\ //\ %s
-		autocmd FileType c,cpp  set foldmethod=marker foldmarker={,} commentstring=\ //\ %s
-		autocmd FileType perl   set formatoptions=croql cindent comments=b:#
-		autocmd FileType python set foldmethod=indent formatoptions=croql cindent comments=b:#
-		autocmd FileType javascript  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,:// foldmethod=marker foldmarker={,}
-		autocmd FileType javascript  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,://
-	augroup END
+        autocmd FileType sh     set formatoptions=croql cindent comments=b:#
+        autocmd FileType c,cpp  set expandtab shiftwidth=4 softtabstop=4
+        autocmd FileType c,cpp  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,://
+        autocmd FileType c,cpp  set foldmethod=marker foldmarker=--fb--{{{,--fe--}}} commentstring=\ //\ %s
+        autocmd FileType c,cpp  set foldmethod=marker foldmarker={,} commentstring=\ //\ %s
+        autocmd FileType perl   set formatoptions=croql cindent comments=b:#
+        autocmd FileType python set foldmethod=indent formatoptions=croql cindent comments=b:#
+        autocmd FileType javascript  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,:// foldmethod=marker foldmarker={,}
+        autocmd FileType javascript  set formatoptions=croql autoindent cindent smartindent comments=sr:/*,mb:*,el:*/,://
+    augroup END
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -527,11 +555,11 @@ autocmd BufNewFile,BufRead test*.py setlocal makeprg=python\ %
 "
 "实现括号，引号等的自动配对后防止重复输入）
 function! ClosePair(char)
-	if getline('.')[col('.') - 1] == a:char
-		return "\<Right>"
-	else
-		return a:char
-	endif
+    if getline('.')[col('.') - 1] == a:char
+        return "\<Right>"
+    else
+        return a:char
+    endif
 endf
 
 function! OpenPair(char)
@@ -566,91 +594,91 @@ endfunction
 "函数后面加上！是防止vimrc文件重新载入时报错
 "实现光标位置自动交换:) -->  ):
 function! Swap()
-	if getline('.')[col('.') - 1] =~ ")"
-		return "\<ESC>la:"
-	else
-		return ":"
-	endif
+    if getline('.')[col('.') - 1] =~ ")"
+        return "\<ESC>la:"
+    else
+        return ":"
+    endif
 endf
 "
 "实现+-*/前后自动添加空格，逗号后面自动添加空格，适用python
 "支持+= -+ *= /+格式
 function! EqualSign(char)
-	if a:char  =~ '='  && getline('.') =~ ".*("
-		return a:char
-	endif 
-	let ex1 = getline('.')[col('.') - 3]
-	let ex2 = getline('.')[col('.') - 2]
+    if a:char  =~ '='  && getline('.') =~ ".*("
+        return a:char
+    endif 
+    let ex1 = getline('.')[col('.') - 3]
+    let ex2 = getline('.')[col('.') - 2]
 
-	if ex1 =~ "[-=+><>\/\*]"
-		if ex2 !~ "\s"
-			return "\<ESC>i".a:char."\<SPACE>"
-		else
-			return "\<ESC>xa".a:char."\<SPACE>"
-		endif 
-	else
-		if ex2 !~ "\s"
-			return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
-		else
-			return a:char."\<SPACE>\<ESC>a"
-		endif 
-	endif
+    if ex1 =~ "[-=+><>\/\*]"
+        if ex2 !~ "\s"
+            return "\<ESC>i".a:char."\<SPACE>"
+        else
+            return "\<ESC>xa".a:char."\<SPACE>"
+        endif 
+    else
+        if ex2 !~ "\s"
+            return "\<SPACE>".a:char."\<SPACE>\<ESC>a"
+        else
+            return a:char."\<SPACE>\<ESC>a"
+        endif 
+    endif
 endf
 "
 "SwitchToBuf()实现它在所有标签页的窗口中查找指定的文件名，如果找到这样一个窗口，
 "就跳到此窗口中；否则，它新建一个标签页来打开vimrc文件
 "上面自动编辑.vimrc文件用到的函数
 function! SwitchToBuf(filename)
-	let bufwinnr = bufwinnr(a:filename)
-	if bufwinnr != -1
-	exec bufwinnr . "wincmd w"
-		return
-	else
-		tabfirst
-		let tab = 1
-		while tab <= tabpagenr("$")
-			let bufwinnr = bufwinnr(a:filename)
-			if bufwinnr != -1
-				exec "normal " . tab . "gt"
-				exec bufwinnr . "wincmd w"
-				return
-			endif
-			tabnext
-			let tab = tab + 1
-		endwhile
-		" not exist, new tab
-		exec "tabnew " . a:filename
-	endif
+    let bufwinnr = bufwinnr(a:filename)
+    if bufwinnr != -1
+    exec bufwinnr . "wincmd w"
+        return
+    else
+        tabfirst
+        let tab = 1
+        while tab <= tabpagenr("$")
+            let bufwinnr = bufwinnr(a:filename)
+            if bufwinnr != -1
+                exec "normal " . tab . "gt"
+                exec bufwinnr . "wincmd w"
+                return
+            endif
+            tabnext
+            let tab = tab + 1
+        endwhile
+        " not exist, new tab
+        exec "tabnew " . a:filename
+    endif
 endfunction
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 "Last change用到的函数，返回时间，能够自动调整位置
 function! TimeStamp(...)
-	let sbegin = ''
-	let send = ''
-	if a:0 >= 1
-		let sbegin = a:1.'\s*'
-	endif
-	if a:0 >= 2
-		let send = ' '.a:2
-	endif
-	let pattern =  'Last Change: .\+'
-		\. send
-	let pattern = '^\s*' . sbegin . pattern . '\s*$'
-	let now = strftime('%Y-%m-%d %H:%M:%S',
-		\localtime())
-	let row = search(pattern, 'n')
-	if row  == 0
-		let now = a:1 .  ' Last Change:  '
-			\. now . send
-		call append(2, now)
-	else
-		let curstr = getline(row)
-		let col = match( curstr , 'Last')
-		let spacestr = repeat(' ',col - 1)
-		let now = a:1 . spacestr . 'Last Change:  '
-			\. now . send
-		call setline(row, now)
-	endif
+    let sbegin = ''
+    let send = ''
+    if a:0 >= 1
+        let sbegin = a:1.'\s*'
+    endif
+    if a:0 >= 2
+        let send = ' '.a:2
+    endif
+    let pattern =  'Last Change: .\+'
+                \. send
+    let pattern = '^\s*' . sbegin . pattern . '\s*$'
+    let now = strftime('%Y-%m-%d %H:%M:%S',
+                \localtime())
+    let row = search(pattern, 'n')
+    if row  == 0
+        let now = a:1 .  ' Last Change:  '
+                    \. now . send
+        call append(2, now)
+    else
+        let curstr = getline(row)
+        let col = match( curstr , 'Last')
+        let spacestr = repeat(' ',col - 1)
+        let now = a:1 . spacestr . 'Last Change:  '
+                    \. now . send
+        call setline(row, now)
+    endif
 endfunction

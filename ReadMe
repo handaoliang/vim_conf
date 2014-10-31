@@ -1,12 +1,13 @@
-vim
-===
+VIM Config Files Project
+=======================
 
-vim config files
+vim config files for VIM or MacVIM or GVIM
 
 To use this:
-cd ~/
-git clone ssh://git@git.comnovo.com:8208/vim_conf_project.git .vim
-ln -s ~/.vim/vimrc ~/.vimrc
+
+$ cd ~/
+$ git clone https://github.com/handaoliang/vim_conf.git ~/.vim
+$ ln -s ~/.vim/_vimrc ~/.vimrc
 
 
 通过修改plugin/acp.vim 第138行，来决定提示匹配多少个字符。
