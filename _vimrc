@@ -163,9 +163,6 @@ set scrolloff=7
 au BufEnter /usr/include/c++/* setf cpp
 au BufEnter /usr/include/g++-3/* setf cpp
 
-" GNU标准
-au BufEnter /usr/* call GnuIndent()
-
 " 设置非粘贴模式
 set nopaste
 
@@ -326,25 +323,25 @@ map <F6> zM
 " C/C++的编译和运行
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-exec "w"
-exec "!make"
-exec "! ./%<"
+	exec "w"
+	exec "!make"
+	exec "! ./%<"
 endfunc
 
 " shell script运行
 map <F6> :call CompileRunSH()<CR>
 func! CompileRunSH()
-exec "w"
-exec "!chmod a+x %"
-exec "!./%"
+	exec "w"
+	exec "!chmod a+x %"
+	exec "!./%"
 endfunc
 
 " python运行
 map <F7> :call CompileRunPyhton()<CR>
 func! CompileRunPyhton()
-exec "w"
-exec "!chmod a+x %"
-exec "!./%"
+	exec "w"
+	exec "!chmod a+x %"
+	exec "!./%"
 endfunc
 
 " 能够漂亮地显示.NFO文件
@@ -688,6 +685,20 @@ function! TimeStamp(...)
     endif
 endfunction
 
+" GNU风格的缩进
+function! GnuIndent ()
+  let b:did_ftplugin = 1
+  setlocal cindent
+  setlocal shiftwidth=2 tabstop=2 textwidth=78 softtabstop=2
+  setlocal cinoptions=>2s,e-s,n-s,{1s,^-s,Ls,:s,=s,g0,+.5s,p2s,t0,(0
+  setlocal formatoptions-=t formatoptions+=croql
+  setlocal comments=sO:*\ -,mO:\ \ \ ,exO:*/,s1:/*,mb:\ ,ex:*/
+  set cpoptions-=C
+  set expandtab smarttab autoindent smartindent
+endfunction
+
+" GNU标准
+" au BufEnter /usr/* call GnuIndent()
 
 "=========================== Vundle ===============================
 "marik/Vundle.vim是目前被推荐次数更多的Vim插件管理器，超过了pathogen。
