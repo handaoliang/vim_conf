@@ -10,6 +10,11 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 设置颜色主题，先注释掉使用默认的。
 " colorscheme darkburn
+" 主题颜色，远程终端不适宜使用颜色主题。
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+" colorscheme molokai
+
 
 " 不要使用vi的键盘模式，而是vim自己的
 set nocompatible
@@ -709,15 +714,6 @@ filetype plugin indent on    " required
 "========================== Vundle ================================
 
 " ============================= GO Setting ========================
-" YCM settings
-let g:ycm_key_list_select_completion = ['', '']
-let g:ycm_key_list_previous_completion = ['']
-let g:ycm_key_invoke_completion = '<C-Space>'
-
-" UltiSnips setting
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " set mapleader
 let mapleader = ","
@@ -739,4 +735,18 @@ au FileType go nmap <Leader>e <Plug>(go-rename)
 " vim-go settings
 let g:go_fmt_command = "goimports"
 
+" YCM settings
+let g:ycm_key_list_select_completion = ['', '']
+let g:ycm_key_list_previous_completion = ['']
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+" UltiSnips setting
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+au BufWritePre *.go call AutoImportPackage()
+
+function! AutoImportPackage()
+endfunction
 " ============================= GO Setting ========================
