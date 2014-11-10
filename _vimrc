@@ -682,3 +682,61 @@ function! TimeStamp(...)
         call setline(row, now)
     endif
 endfunction
+
+
+"=========================== Vundle ===============================
+"marik/Vundle.vim是目前被推荐次数更多的Vim插件管理器，超过了pathogen。
+"这里我们 就用vundle来作为Vim的插件管理工具。
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" 安装Vim-Go插件，如果没有这个插件，则在VIM内执行：PluginInstall
+Plugin 'fatih/vim-go'
+
+" 安装YCM(Your Complete Me)
+Plugin 'Valloric/YouCompleteMe'
+
+" 安装 UltiSnips，Vim-go默认是用ultisnips引擎插件，但这个插件需要单独安装。
+Plugin 'SirVer/ultisnips'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+"========================== Vundle ================================
+
+" ============================= GO Setting ========================
+" YCM settings
+let g:ycm_key_list_select_completion = ['', '']
+let g:ycm_key_list_previous_completion = ['']
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+" UltiSnips setting
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" set mapleader
+let mapleader = ","
+
+" vim-go custom mappings
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+" vim-go settings
+let g:go_fmt_command = "goimports"
+
+" ============================= GO Setting ========================
