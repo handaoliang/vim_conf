@@ -714,7 +714,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'fatih/vim-go'
 
 " 安装YCM(Your Complete Me)
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " 安装 UltiSnips，Vim-go默认是用ultisnips引擎插件，但这个插件需要单独安装。
 Plugin 'SirVer/ultisnips'
@@ -727,7 +727,7 @@ filetype plugin indent on    " required
 " ============================= GO Setting ========================
 
 " set mapleader
-let mapleader = ","
+let mapleader = ','
 
 " vim-go custom mappings
 au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -744,7 +744,7 @@ au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
 " vim-go settings
-let g:go_fmt_command = "goimports"
+let g:go_fmt_command = 'goimports'
 
 " YCM settings
 let g:ycm_key_list_select_completion = ['', '']
@@ -752,12 +752,14 @@ let g:ycm_key_list_previous_completion = ['']
 let g:ycm_key_invoke_completion = '<C-Space>'
 
 " UltiSnips setting
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+
+function! AutoImportPackage()
+	:GoImports
+endfunction
 
 au BufWritePre *.go call AutoImportPackage()
 
-function! AutoImportPackage()
-endfunction
 " ============================= GO Setting ========================
