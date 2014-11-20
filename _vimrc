@@ -760,6 +760,8 @@ function! AutoImportPackage()
 	:GoImports
 endfunction
 
+nnoremap <c-p> :call AutoImportPackage()<CR>
+
 au BufWritePre *.go call AutoImportPackage()
 
 " ============================= GO Setting ========================
