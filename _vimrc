@@ -31,8 +31,8 @@ if has ("mac")
     set guifont=YaHei\ Mono:h13
 
     " 窗口相关。
-    winpos 50 50
-    set lines=48 columns=180
+    winpos 0 0
+    set lines=48 columns=205
     colo desert
 endif
 """""""""""""""""""针对MacVIM的设置"""""""""""""""""""
@@ -372,7 +372,10 @@ set showmatch
 set matchtime=3
 
 " 在搜索的时候忽略大小写
-set ignorecase
+" set ignorecase
+
+" 考虑到大部分语言区分大小写，设置成在搜索的时候区分大小写
+set noignorecase
 
 " 不要高亮被搜索的句子（phrases）
 set nohlsearch
