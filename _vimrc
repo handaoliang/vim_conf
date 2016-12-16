@@ -301,11 +301,11 @@ nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 " 打开折叠
 " map <F3> zO
 " 关闭折叠
-map <F4> zc
+" map <F4> zc
 " 打开所有折叠
-map <F5> zR
+" map <F5> zR
 " 关闭所有折叠
-map <F6> zM
+" map <F6> zM
 
 " 保存代码文件前自动修改最后修改时间
 " au BufWritePre *.sh           call TimeStamp('#')
@@ -703,6 +703,78 @@ endfunction
 " GNU标准
 " au BufEnter /usr/* call GnuIndent()
 
+
+" 针对PHP做的一些优化 ==============================================================================================
+" function! UpdateFileComments()
+"     call cursor(9,1)
+"     if search ('@File Name') != 0
+"         let line = line('.')
+"         call setline(line, ' * @File Name            $RCSfile: '.expand('%:t:r').'.'.expand('%:e').',v $' )
+"     endif
+"     if search ('@Last Modified') != 0
+"         let line = line('.')
+"         call setline(line, ' * @Last Modified        $Date: '.strftime("%Y-%m-%d %H:%M:%S").' $' )
+"     endif
+" endfunc
+" 
+" autocmd FileWritePre,BufWritePre *.php,*.js,*.cpp ks|call UpdateFileComments() |'s
+
+map <F4> :call AddFileComments()<cr>
+
+" 自动添加文件注释
+function! AddFileComments()
+    let fileExt = expand('%:e')
+    let fileName = expand('%:t:r')
+    if fileExt != ""
+        let fileName = fileName.'.'.fileExt
+    endif
+    call append(0,'/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */')
+    call append(1,'/**')
+    call append(2,' * @Package')
+    call append(3,' * @File Name           $RCSfile: '.fileName.',v $')
+    call append(4,' * @Version             $Revision: 1.0 $')
+    call append(5,' * @Create Date         $Date: '.strftime("%Y-%m-%d %H:%M:%S").' $')
+    call append(6,' * @Last Modified       $Date: '.strftime("%Y-%m-%d %H:%M:%S").' $')
+    call append(7,' * @Modified By         $Author: handaoliang <handaoliang@gmail.com> $')
+    call append(8,' * @Copy Right          Copyright (c) '.strftime("%Y").', Comnovo Inc All Rights Reserved.')
+    call append(9,'**/')
+    call append(10,'/**')
+    call append(11,' * ')
+    call append(12,'**/')
+
+    if fileExt == 'php' || fileExt == 'PHP'
+        call append(0, '<?php')
+    endif
+    " echohl WarningMsg | echo 'Added Comments Successful.' | echohl None
+endf
+
+" 更新最近修改时间和文件名
+function! UpdateLastModifiedDate()
+    call cursor(9,1)
+    if search ('@Last Modified') != 0
+        let line = line('.')
+        call setline(line, ' * @Last Modified       $Date: '.strftime("%Y-%m-%d %H:%M:%S").' $' )
+    endif
+endfunc
+
+" autocmd FileWritePre,BufWritePre *.php,*.js,*.cpp ks|call UpdateLastModifiedDate() |'s
+
+" 判断前10行代码里面是否有@Last Modified，如果没有，新添加，如果有的话，更新它。
+" function! DoAddFileComments()
+"     let n=1
+"     "默认为添加
+"     while n < 10
+"         let line = getline(n)
+"         if line =~ '^\s*\S*@Last\sModified\S*.*$'
+"             call UpdateLastModifiedDate()
+"             return
+"         endif
+"         let n = n + 1
+"     endwhile
+"     call AddFileComments()
+" endfunction
+" 针对PHP做的一些优化 ==============================================================================================
+
 "=========================== Vundle ===============================
 "marik/Vundle.vim是目前被推荐次数更多的Vim插件管理器，超过了pathogen。
 "这里我们 就用vundle来作为Vim的插件管理工具。
@@ -768,3 +840,21 @@ nnoremap <c-p> :call AutoImportPackage()<CR>
 au BufWritePre *.go call AutoImportPackage()
 
 " ============================= GO Setting ========================
+
+" 对齐插件，是喜欢Tabular还是vim-easy-align自己决定，地址都在下面，安装方式也一样 ===========
+" 这个插件得自己安装，安装方式如下：
+" mkdir -p ~/.vim/bundle
+" cd ~/.vim/bundle
+" git clone git://github.com/godlygeek/tabular.git
+" Plugin 'gmarik/tabular'
+
+
+" git clone https://github.com/junegunn/vim-easy-align.git
+Plugin 'junegunn/vim-easy-align'
+" Config for easyAlign ===========================================================
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+map <F2> <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
