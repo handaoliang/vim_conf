@@ -757,6 +757,7 @@ function! UpdateLastModifiedDate()
     endif
 endfunc
 
+" 是否自动更新最后更新时间，依个人喜好是否开启。
 " autocmd FileWritePre,BufWritePre *.php,*.js,*.cpp ks|call UpdateLastModifiedDate() |'s
 
 " 判断前10行代码里面是否有@Last Modified，如果没有，新添加，如果有的话，更新它。
@@ -799,7 +800,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 "========================== Vundle ================================
 
-" ============================= GO Setting ========================
+" ============================= Start GoLang Setting ========================
 
 " set mapleader
 let mapleader = ','
@@ -839,7 +840,7 @@ nnoremap <c-p> :call AutoImportPackage()<CR>
 
 au BufWritePre *.go call AutoImportPackage()
 
-" ============================= GO Setting ========================
+" ============================= End GoLang Setting ========================
 
 " 对齐插件，是喜欢Tabular还是vim-easy-align自己决定，地址都在下面，安装方式也一样 ===========
 " 这个插件得自己安装，安装方式如下：
