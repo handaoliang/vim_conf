@@ -26,13 +26,15 @@ set softtabstop=4
 set tabstop=4
 
 """""""""""""""""""针对MacVIM的设置"""""""""""""""""""
-if has ("mac")
+"if has ("mac")
+if has ("gui_macvim")
     " 设置显示字体
-    set guifont=YaHei\ Mono:h13
+    set guifont=YaHei\ Mono:h14
 
     " 窗口相关。
     winpos 0 0
-    set lines=48 columns=205
+    " set lines=48 columns=205
+    set lines=50 columns=265
     colo desert
 endif
 """""""""""""""""""针对MacVIM的设置"""""""""""""""""""
@@ -451,20 +453,11 @@ if has("autocmd")
     filetype plugin indent on
 
     " In text files, always limit the width of text to 78 characters
-    autocmd BufEnter *.txt set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
-    autocmd FileType text set textwidth=78 expandtab softtabstop=4
-    autocmd FileType sh set shiftwidth=4 expandtab softtabstop=4
+    autocmd BufEnter *.txt,text set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
     autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php.dict
-    autocmd FileType html set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType xml set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType javascript set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType python set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType ruby set shiftwidth=2 expandtab softtabstop=2
-    autocmd FileType eruby set shiftwidth=2 expandtab softtabstop=2
-    autocmd FileType sql set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType go set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType lua set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType ruby,eruby set shiftwidth=2 expandtab softtabstop=2
     autocmd FileType _vimrc,.vimrc,*.vim set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType sh,*.sh,html,*.tpl,xml,javascript,*.js,python,sql,go,lua set shiftwidth=4 expandtab softtabstop=4
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
@@ -858,4 +851,3 @@ xmap ga <Plug>(EasyAlign)
 map <F2> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
