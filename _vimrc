@@ -132,7 +132,7 @@ set noswapfile
 set history=1024
 
 " 共享外部剪贴板
-set clipboard+=unnamed
+" set clipboard+=unnamed
 
 " 显示未完成命令
 set showcmd
@@ -454,10 +454,14 @@ if has("autocmd")
 
     " In text files, always limit the width of text to 78 characters
     autocmd BufEnter *.txt,text set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
-    autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php.dict
+    " autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php.dict
+    autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php_v2.dict omnifunc=phpcomplete#CompletePHP
+    autocmd FileType go set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/golang.dict
+    autocmd FileType lua set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/lua.dict
+    autocmd FileType javascript,*.js set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/javascript.dict
     autocmd FileType ruby,eruby set shiftwidth=2 expandtab softtabstop=2
     autocmd FileType _vimrc,.vimrc,*.vim set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType sh,*.sh,html,*.tpl,xml,javascript,*.js,python,sql,go,lua set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType sh,*.sh,html,*.tpl,xml,python,sql set shiftwidth=4 expandtab softtabstop=4
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
@@ -782,9 +786,6 @@ Plugin 'gmarik/Vundle.vim'
 " 安装Vim-Go插件，如果没有这个插件，则在VIM内执行：PluginInstall
 Plugin 'fatih/vim-go'
 
-" 安装YCM(Your Complete Me)
-" Plugin 'Valloric/YouCompleteMe'
-
 " 安装 UltiSnips，Vim-go默认是用ultisnips引擎插件，但这个插件需要单独安装。
 Plugin 'SirVer/ultisnips'
 
@@ -833,6 +834,8 @@ nnoremap <c-p> :call AutoImportPackage()<CR>
 
 au BufWritePre *.go call AutoImportPackage()
 
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+
 " ============================= End GoLang Setting ========================
 
 " 对齐插件，是喜欢Tabular还是vim-easy-align自己决定，地址都在下面，安装方式也一样 ===========
@@ -850,4 +853,39 @@ Plugin 'junegunn/vim-easy-align'
 xmap ga <Plug>(EasyAlign)
 map <F2> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+map ga <Plug>(EasyAlign)
+
+
+" == Start ndentLine Config============================
+Plugin 'Yggdroot/indentLine'
+
+" --line settings -- only UTF-8 ----------
+let g:indentLine_char = '┆'
+" let g:indentLine_char = '¦'
+" let g:indentLine_char = '│'
+
+" -- color settings----
+" Vim
+let g:indentLine_color_term = 239
+
+"GVim
+let g:indentLine_color_gui = '#A4E57E'
+
+" none X terminal
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+" -- color settings----
+" == End ndentLine Config============================
+
+" == Start vim-gitgutter Config ================
+Plugin 'airblade/vim-gitgutter'
+" == End vim-gitgutter Config ================
+
+" == Start NERDTree Config ================
+Plugin 'scrooloose/nerdtree'
+map <C-n> :NERDTreeToggle<CR>
+" == End NERDTree Config ================
+
+" == Start powerline config ===================
+Plugin 'Lokaltog/vim-powerline'
+" == End powerline config ===================
