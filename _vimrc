@@ -452,6 +452,8 @@ if has("autocmd")
     " Also load indent files, to automatically do language-dependent indenting.
     filetype plugin indent on
 
+    " Set all file tab to 4 space 
+    autocmd FileType * set shiftwidth=4 expandtab softtabstop=4
     " In text files, always limit the width of text to 78 characters
     autocmd BufEnter *.txt,text set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
     " autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php.dict
