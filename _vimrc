@@ -444,7 +444,8 @@ if has("autocmd")
 
     " load view saved by the mkview command
     autocmd FileType * loadview
-    autocmd FileType * set noexpandtab
+    " autocmd FileType * set noexpandtab
+    autocmd FileType * set expandtab
     " autocmd BufWinEnter * loadview
 
     " Use the default filetype settings, so that mail gets 'tw' set to 72,
@@ -455,13 +456,14 @@ if has("autocmd")
     " In text files, always limit the width of text to 78 characters
     autocmd BufEnter *.txt,text set filetype=text textwidth=78 expandtab shiftwidth=4 softtabstop=4
     " autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php.dict
-    autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php_v2.dict omnifunc=phpcomplete#CompletePHP
+    " autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php_v2.dict omnifunc=phpcomplete#CompletePHP
+    autocmd FileType php set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/php_v2.dict
     autocmd FileType go set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/golang.dict
     autocmd FileType lua set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/lua.dict
     autocmd FileType javascript,*.js set shiftwidth=4 expandtab softtabstop=4 dictionary=~/.vim/dict/javascript.dict
     autocmd FileType ruby,eruby set shiftwidth=2 expandtab softtabstop=2
     autocmd FileType _vimrc,.vimrc,*.vim set shiftwidth=4 expandtab softtabstop=4
-    autocmd FileType sh,*.sh,html,*.tpl,xml,python,sql set shiftwidth=4 expandtab softtabstop=4
+    autocmd FileType sh,*.sh,html,*.tpl,xml,python,sql,*.json,json set shiftwidth=4 expandtab softtabstop=4
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
