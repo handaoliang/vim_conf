@@ -1,6 +1,8 @@
 VIM Config Files Project
 =======================
 
+![截图](preview.png)
+
 vim config files for VIM or MacVIM or GVIM
 
 To use this:
