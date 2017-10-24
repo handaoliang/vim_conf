@@ -7,10 +7,12 @@ vim config files for VIM or MacVIM or GVIM
 
 To use this:
 
-`$ cd ~/`
-`git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
-`$ git clone https://github.com/handaoliang/vim_conf.git ~/.vim`
-`$ ln -s ~/.vim/_vimrc ~/.vimrc`
+```
+$ cd ~/
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$ git clone https://github.com/handaoliang/vim_conf.git ~/.vim
+$ ln -s ~/.vim/_vimrc ~/.vimrc
+```
 
 
 通过修改plugin/acp.vim 第138行，来决定提示匹配多少个字符。
@@ -46,10 +48,11 @@ Press ENTER or type command to continue
 
 ------------
 
-关于Golang工具包的安装：
+关于插件的安装以及Golang工具包的安装：
 ```
+PluginInstall
 GoInstallBinaries
-```'
+```
 
 用到的开源项目：
 `https://github.com/StanAngeloff/php.vim`
