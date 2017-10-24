@@ -7,16 +7,19 @@ vim config files for VIM or MacVIM or GVIM
 
 To use this:
 
-$ cd ~/
-$ git clone https://github.com/handaoliang/vim_conf.git ~/.vim
-$ ln -s ~/.vim/_vimrc ~/.vimrc
+`$ cd ~/`
+`git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+`$ git clone https://github.com/handaoliang/vim_conf.git ~/.vim`
+`$ ln -s ~/.vim/_vimrc ~/.vimrc`
 
 
 通过修改plugin/acp.vim 第138行，来决定提示匹配多少个字符。
 
 
 " 通过修改这一项，以决定匹配多少个字符。默认是2，这里修改成3，以更符合编程习惯。
+```
 call s:defineOption('g:acp_behaviorKeywordLength', 3)
+```
 
 ----------
 
@@ -43,9 +46,11 @@ Press ENTER or type command to continue
 
 ------------
 
+关于Golang工具包的安装：
+```
+GoInstallBinaries
+```'
+
 用到的开源项目：
-https://github.com/StanAngeloff/php.vim
-https://github.com/disassembler/vim
-
-
--------test
+`https://github.com/StanAngeloff/php.vim`
+`https://github.com/disassembler/vim`

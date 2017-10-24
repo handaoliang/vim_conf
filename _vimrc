@@ -780,12 +780,25 @@ endfunc
 "=========================== Vundle ===============================
 "marik/Vundle.vim是目前被推荐次数更多的Vim插件管理器，超过了pathogen。
 "这里我们 就用vundle来作为Vim的插件管理工具。
+
+" ========================================================
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+" The sparkup vim script is in a subdirectory of this repo called vim.
+" Pass the path to set the runtimepath properly.
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " 安装Vim-Go插件，如果没有这个插件，则在VIM内执行：PluginInstall
 Plugin 'fatih/vim-go'
